@@ -1,0 +1,69 @@
+html, body {
+  min-height: 100vh;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
+
+
+
+.mat-toolbar.mat-primary {
+  background: #105982;
+  min-height: 45px !important;
+}
+
+.mat-form-field.mat-form-field {
+  width: auto;
+}
+
+.mat-form-field .mat-form-field-infix {
+  width: auto;
+}
+
+.container{
+  min-height:100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.botao {
+    border-radius: 4px;
+    min-height: 55px;
+    margin-top: 20px;
+    box-shadow: 0px 6px 10px #999999 !important;
+  }
+
+  .example-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .example-icon {
+    padding: 0 14px;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+ 
+  .padding {
+    padding: 10px;
+  }
+
+  .master {
+    background-color: #f2f2f2;   
+    min-height: 100vh;
+  }
+
+  mat-toolbar {
+    padding: 0;
+  }
+
+  .example-tooltip-host {
+    display: inline-flex;
+    align-items: center;
+    margin: 50px;
+  }

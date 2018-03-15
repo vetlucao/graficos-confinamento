@@ -1,0 +1,153 @@
+<mat-toolbar style="height: 20px !important" color="primary">
+  <mat-toolbar-row>
+
+    <img src="../assets/svg/logo_intergado_animado_white.svg" height=30 alt="primary">
+
+    <span class="example-spacer"></span>
+    <button matTooltip="Tooltip!" matTooltipPosition="below" mat-button>About</button>
+    <button mat-button>About</button>
+    <button mat-button>About</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="master padding">
+  
+  <mat-card>
+    <app-grafico-lotes></app-grafico-lotes>
+  </mat-card>
+
+  <br>
+
+  <mat-card>
+    <app-grafico-dinamica></app-grafico-dinamica>
+  </mat-card>
+
+  <br>
+
+  <mat-card>
+    <app-grafico-desempenho></app-grafico-desempenho>
+  </mat-card>
+
+  <br>
+
+  <mat-progress-bar mode="indeterminate" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
+
+  <mat-card>
+
+    <mat-form-field>
+      <input matInput [disabled]="!checked" [(ngModel)]="answer" placeholder="Your name?">
+    </mat-form-field>
+
+    <mat-slide-toggle class="example-margin" [(ngModel)]="checked" color="primary" [checked]="checked" [disabled]="disabled">
+      {{checked == true ? 'On' : 'Off'}}
+    </mat-slide-toggle>
+
+    <br>
+
+    <button [disabled]="!checked" color="primary" mat-raised-button (click)="showAnswer()">Answer me</button>
+
+  </mat-card>
+
+  <br>
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Personal data
+        </mat-panel-title>
+        <mat-panel-description>
+          Type your name and age
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <input matInput placeholder="First name">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Age">
+      </mat-form-field>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Self aware panel
+        </mat-panel-title>
+        <mat-panel-description>
+          Currently I am {{panelOpenState ? 'open' : 'closed'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>I'm visible because I am open</p>
+      <div class="w3-panel w3-note">Small Well</div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+  <br>
+
+  <mat-progress-bar mode="indeterminate" [style.display]="showSpinnerCep ? 'block' : 'none'"></mat-progress-bar>
+  <mat-card>
+    <mat-form-field>
+      <input matInput type="text" [textMask]="{mask: mask}" [(ngModel)]="cep" placeholder="CEP">
+      <mat-error *ngIf="cepValido">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+
+
+    <br>
+
+    <button color="primary" mat-raised-button (click)="buscarCep()">Buscar endereço</button>
+    <br>
+    <br>
+
+    <div *ngIf="cepValido" >
+      <mat-form-field>
+        <input matInput type="text" [(ngModel)]="rua" disabled="true" placeholder="Rua" capitalize>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput type="text" [(ngModel)]="bairro" disabled="true" placeholder="Bairro">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" [(ngModel)]="cidade" disabled="true" placeholder="Cidade">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" [(ngModel)]="uf" disabled="true" placeholder="Uf">
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="errorCep" class="alert alert-danger padding">
+      Cep inválido
+    </div>
+
+  </mat-card>
+
+  <br>
+
+  <mat-card>
+
+    <mat-form-field>
+
+      <mat-select [(ngModel)]="organizacaoSelecionada" (change)="selecionarOrganizacao()" placeholder="Selecione a organização">
+        <mat-option *ngFor="let org of organizacoes" [value]="org.value">
+          {{ org.label }}
+        </mat-option>
+      </mat-select>
+
+    </mat-form-field>
+
+    <mat-form-field>
+
+      <mat-select placeholder="Selecione a fazenda">
+        <mat-option *ngFor="let fazenda of fazendasByOrganizacao" [value]="fazenda.value">
+          {{ fazenda.label }}
+        </mat-option>
+      </mat-select>
+
+    </mat-form-field>
+
+  </mat-card>
+
+</div>
