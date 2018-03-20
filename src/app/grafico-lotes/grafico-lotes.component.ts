@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as _ from 'lodash';
-import { ChartService } from '../service/chart-service';
 import * as Plotly from 'plotly.js';
+import { GraficoLotesService } from './grafico-lotes.service';
 
 @Component({
   selector: 'app-grafico-lotes',
@@ -18,32 +18,40 @@ export class GraficoLotesComponent implements OnInit {
   data:any;
   layout:any;
 
-  constructor(private chartService: ChartService) { }
+  possuiMeta;
+  unidade;
+  y1;
+  x1;
+  e1;
+  l1;
+  y2;
+  l2;
+
+  constructor(private graficoLotesService: GraficoLotesService) { }
 
   ngOnInit() {
-    this.geraGrafico()
+    this.possuiMeta = this.graficoLotesService.getPossuiMeta();
+    this.unidade = this.graficoLotesService.getUnidade();
+    this.y1 = this.graficoLotesService.getY1();
+    this.y2 = this.graficoLotesService.getY2();
+    this.e1 = this.graficoLotesService.getE1();
+    this.x1 = this.graficoLotesService.getX1();
+
+    this.geraGrafico();
   }
 
 
   geraGrafico() {
-    var possuiMeta = true;
-    var unidade = "kg"
-    var y1 = [446.9, 505.5, 496.2, 569, 550.4, 491.7, 470.4, 481.6, 407.9, 464.4];
-    var x1 = ["lote 1", "lote 2", "lote 3", "lote 4", "lote 5", "lote 6", "lote 7", "lote 8", "lote 9", "lote 10"];
-    var e1 = [62, 46, 49, 38, 52, 55, 47, 58, 37, 35];
-    var l1 = y1.map((y1i, i) => ` Mediana:<br> ${y1i} ${unidade} ± ${e1[i]} ${unidade} `);
-
-    if (possuiMeta) {
-      var y2 = ["500", "500", "500", "600", "600", "500", "500", "450", "450", "450"];
-      var l2 = y2.map((y2i, i) => ` Meta: ${y2i} ${unidade} `);
-    }
+    
+    var l1 = this.y1.map((y1i, i) => ` Mediana:<br> ${y1i} ${this.unidade} ± ${this.e1[i]} ${this.unidade} `);
+    var l2 = this.y2.map((y2i, i) => ` Meta: ${y2i} ${this.unidade} `);
 
     this.data = [{
-      y: y1,
-      x: x1,
+      y: this.y1,
+      x: this.x1,
       error_y: {
         type: "data",
-        array: e1,
+        array: this.e1,
         width: 0,
         thickness: 2.5
       },
@@ -58,11 +66,11 @@ export class GraficoLotesComponent implements OnInit {
     }
     ];
 
-    if (possuiMeta) {
+    if (this.possuiMeta) {
       this.data.push({
         mode: "markers",
-        y: y2,
-        x: x1,
+        y: this.y2,
+        x: this.x1,
         marker: {
           size: 9,
           symbol: "x",
@@ -77,7 +85,6 @@ export class GraficoLotesComponent implements OnInit {
         hoverinfo: "text"
       });
     }
-
 
     this.layout = {
       height: 150,

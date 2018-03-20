@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as _ from 'lodash';
-import { ChartService } from '../service/chart-service';
 import * as Plotly from 'plotly.js';
+import { GraficoDinamicaService } from './grafico-dinamica.service';
 
 @Component({
   selector: 'app-grafico-dinamica',
@@ -18,41 +18,53 @@ export class GraficoDinamicaComponent implements OnInit {
   data:any;
   layout:any;
 
-  constructor(private chartService: ChartService) { }
+  y1;
+  x1;
+  l1;
+  y2;
+  l2;
+  y3;
+  l3;
+  y4;
+  l4;
+  y5;
+  l5;
+  y6;
+  l6;
+  y7;
+  l7;
+  y8;
+  l8;
+
+  constructor(private graficoDinamicaService: GraficoDinamicaService) { }
 
   ngOnInit() {
-    this.geraGrafico()
+    this.y1 = this.graficoDinamicaService.getY1();
+    this.y2 = this.graficoDinamicaService.getY2();
+    this.y3 = this.graficoDinamicaService.getY3();
+    this.y4 = this.graficoDinamicaService.getY4();
+    this.y5 = this.graficoDinamicaService.getY5();
+    this.y6 = this.graficoDinamicaService.getY6();
+    this.y7 = this.graficoDinamicaService.getY7();
+    this.y8 = this.graficoDinamicaService.getY8();
+    this.x1 = this.graficoDinamicaService.getX1();
+
+    this.geraGrafico();
   }
 
   geraGrafico() {
-    var y1 = [1.9, 2.2, 2.1, 2.2];
-    var x1 = ["23/Jul", "06/Aug", "20/Aug", "03/Set"];
-    var l1 = y1.map((y1i, i) => ` ${y1i}kg<br> ${x1[i]} `);
-    
-    var y2 = [2.5, 2.6, 2.5, 2.6];
-    var l2 = y2.map((y2i, i) => ` ${y2i}kg<br> ${x1[i]} `);
-
-    var y3 = [2.2, 2.4, 2.3, 2.4];
-    var l3 = y3.map((y3i, i) => ` ${y3i}kg<br> ${x1[i]} `);
-
-    var y4 = [40, 42, 41, 42];
-    var l4 = y4.map((y4i, i) => ` ${y4i}kg/d<br> ${x1[i]} `);
-    
-    var y5 = [44, 46, 45, 46];
-    var l5 = y5.map((y5i, i) => ` ${y5i}kg/d<br> ${x1[i]} `);
-
-    var y6 = [42, 44, 43, 44];
-    var l6 = y6.map((y6i, i) => ` ${y6i}kg/d<br> ${x1[i]} `);
-    
-    var y7 = [38000, 42000, 46000, 50000];
-    var l7 = y7.map((y7i, i) => ` ${y7i}kg<br> ${x1[i]} `);
-    
-    var y8 = [0, 2500, 5000, 7500];
-    var l8 = y8.map((y8i, i) => ` ${y8i}kg<br> ${x1[i]} `);
+    this.l1 = this.y1.map((y1i, i) => ` ${y1i}kg<br> ${this.x1[i]} `);
+    this.l2 = this.y2.map((y2i, i) => ` ${y2i}kg<br> ${this.x1[i]} `);
+    this.l3 = this.y3.map((y3i, i) => ` ${y3i}kg<br> ${this.x1[i]} `);
+    this.l4 = this.y4.map((y4i, i) => ` ${y4i}kg/d<br> ${this.x1[i]} `);
+    this.l5 = this.y5.map((y5i, i) => ` ${y5i}kg/d<br> ${this.x1[i]} `);
+    this.l6 = this.y6.map((y6i, i) => ` ${y6i}kg/d<br> ${this.x1[i]} `);
+    this.l7 = this.y7.map((y7i, i) => ` ${y7i}kg<br> ${this.x1[i]} `);
+    this.l8 = this.y8.map((y8i, i) => ` ${y8i}kg<br> ${this.x1[i]} `);
 
     this.data = [{
-      y: y1,
-      x: x1,
+      y: this.y1,
+      x: this.x1,
       yaxis	: "y4",
       mode: "lines",
       line:{
@@ -60,12 +72,12 @@ export class GraficoDinamicaComponent implements OnInit {
         width:0
       },
       type: "scatter",
-      text: l1,
+      text: this.l1,
       hoverinfo: "text"
     },
     {
-      y: y2,
-      x: x1,
+      y: this.y2,
+      x: this.x1,
       yaxis	: "y4",
       mode: "lines",
       fillcolor	: "rgba(55, 170, 105, 0.2)",
@@ -75,12 +87,12 @@ export class GraficoDinamicaComponent implements OnInit {
       },
       fill: "tonexty",
       type: "scatter",
-      text: l2,
+      text: this.l2,
       hoverinfo: "text"
     },
     {
-      y: y3,
-      x: x1,
+      y: this.y3,
+      x: this.x1,
       yaxis	: "y4",
       mode: "lines",
       line:{
@@ -88,12 +100,12 @@ export class GraficoDinamicaComponent implements OnInit {
         width:3
       },
       type: "scatter",
-      text: l3,
+      text: this.l3,
       hoverinfo: "text"
     },
     {
-      y: y4,
-      x: x1,
+      y: this.y4,
+      x: this.x1,
       yaxis	: "y3",
       mode: "lines",
       line:{
@@ -101,11 +113,11 @@ export class GraficoDinamicaComponent implements OnInit {
         width:0
       },
       type: "scatter",
-      text: l4,
+      text: this.l4,
       hoverinfo: "text"
     },
     {
-      y: y5,
+      y: this.y5,
       x: ["23/Jul", "06/Aug", "20/Aug", "03/Set"],
       yaxis	: "y3",
       mode: "lines",
@@ -116,11 +128,11 @@ export class GraficoDinamicaComponent implements OnInit {
       },
       fill: "tonexty",
       type: "scatter",
-      text: l5,
+      text: this.l5,
       hoverinfo: "text"
     },
     {
-      y: y6,
+      y: this.y6,
       x: ["23/Jul", "06/Aug", "20/Aug", "03/Set"],
       yaxis	: "y3",
       mode: "lines",
@@ -129,11 +141,11 @@ export class GraficoDinamicaComponent implements OnInit {
         width:3
       },
       type: "scatter",
-      text: l6,
+      text: this.l6,
       hoverinfo: "text"
     },
     {
-      y: y7,
+      y: this.y7,
       x: ["23/Jul", "06/Aug", "20/Aug", "03/Set"],
       yaxis	: "y2",
       mode: "lines",
@@ -142,12 +154,12 @@ export class GraficoDinamicaComponent implements OnInit {
         width:3
       },
       type: "scatter",
-      text: l7,
+      text: this.l7,
       hoverinfo: "text"
     },
     {
-      y: y8,
-      x: x1,
+      y: this.y8,
+      x: this.x1,
       yaxis	: "y",
       mode: "lines",
       line:{
@@ -155,7 +167,7 @@ export class GraficoDinamicaComponent implements OnInit {
         width:3
       },
       type: "scatter",
-      text: l8,
+      text: this.l8,
       hoverinfo: "text"
     }
   ];

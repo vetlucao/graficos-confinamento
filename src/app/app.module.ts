@@ -8,10 +8,12 @@ import { TextMaskModule } from 'angular2-text-mask';
 
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { ChartService } from './service/chart-service';
 import { GraficoLotesComponent } from './grafico-lotes/grafico-lotes.component';
 import { GraficoDinamicaComponent } from './grafico-dinamica/grafico-dinamica.component';
 import { GraficoDesempenhoComponent } from './grafico-desempenho/grafico-desempenho.component';
+import { GraficoDesempenhoService } from './grafico-desempenho/grafico-desempenho.service';
+import { GraficoDinamicaService } from './grafico-dinamica/grafico-dinamica.service';
+import { GraficoLotesService } from './grafico-lotes/grafico-lotes.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,7 @@ import { GraficoDesempenhoComponent } from './grafico-desempenho/grafico-desempe
     HttpClientModule,
     TextMaskModule
   ],
-  providers: [HttpUtil, ChartService],
+  providers: [HttpUtil, GraficoDesempenhoService, GraficoDinamicaService, GraficoLotesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
