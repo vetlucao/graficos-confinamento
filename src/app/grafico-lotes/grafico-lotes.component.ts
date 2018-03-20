@@ -18,8 +18,8 @@ export class GraficoLotesComponent implements OnInit {
   data:any;
   layout:any;
 
-  possuiMeta;
-  unidade;
+  possuiMeta:boolean;
+  unidade:string;
   y1;
   x1;
   e1;
